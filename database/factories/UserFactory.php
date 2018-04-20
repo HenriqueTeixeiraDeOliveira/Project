@@ -21,3 +21,14 @@ $factory->define(App\User::class, function (Faker $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(App\Lesson::class, function (Faker $faker) {
+    return [
+        'subject_id' => 1,
+        'professor_id' => 1,
+        'title' => 'The Example Lesson',
+        'subtitle' => 'This subtitle is just a example',
+        'link' => 'https://youtu.be/t_bOaAf_E0c',
+        'published_at' => null
+    ];
+});
