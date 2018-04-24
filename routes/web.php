@@ -12,3 +12,7 @@
 */
 
 Route::get('/lessons/{id}','LessonsController@show');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
