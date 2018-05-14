@@ -18,13 +18,12 @@ class ViewLessonTest extends TestCase
 
         //$this->withoutExceptionHandling();
 
-        $lesson = Lesson::create([
+        $lesson = factory(Lesson::class)->states('published')->create([
             'subject_id' => "1",
             'professor_id' => "1",
             'title' => "Isomeria Espacial",
             'subtitle' => "Neque porro quisquam est qui dolorem ipsum",
             'link' => 'https://youtu.be/t_bOaAf_E0c',
-            'published_at' => Carbon::parse('-1 week')
         ]);
 
         $response = $this->get('/lessons/'.$lesson->id);
@@ -39,9 +38,7 @@ class ViewLessonTest extends TestCase
     /** @test */
     public function user_cannot_watch_a_unpublished_video_lesson()
     {
-        $lesson = factory(Lesson::class)->create([
-            'published_at' => null
-        ]);
+        $lesson = factory(Lesson::class)->states('unpublished')->create();
 
         $response = $this->get('/lessons/'.$lesson->id);
 

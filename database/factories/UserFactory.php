@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Faker\Generator as Faker;
 
 /*
@@ -28,7 +29,18 @@ $factory->define(App\Lesson::class, function (Faker $faker) {
         'professor_id' => 1,
         'title' => 'The Example Lesson',
         'subtitle' => 'This subtitle is just a example',
-        'link' => 'https://youtu.be/t_bOaAf_E0c',
+        'link' => 'https://www.youtube.com/embed/t_bOaAf_E0c'
+    ];
+});
+
+$factory->state(App\Lesson::class, 'published', function ($faker) {
+    return [
+        'published_at' => Carbon::parse('-1 week')
+    ];
+});
+
+$factory->state(App\Lesson::class, 'unpublished', function ($faker) {
+    return [
         'published_at' => null
     ];
 });
