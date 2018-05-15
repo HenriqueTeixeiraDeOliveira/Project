@@ -23,7 +23,7 @@ class ViewLessonTest extends TestCase
             'professor_id' => "1",
             'title' => "Isomeria Espacial",
             'subtitle' => "Neque porro quisquam est qui dolorem ipsum",
-            'link' => 'https://youtu.be/t_bOaAf_E0c',
+            'link' => 'https://www.youtube.com/embed/t_bOaAf_E0c',
         ]);
 
         $response = $this->get('/lessons/'.$lesson->id);
@@ -31,7 +31,7 @@ class ViewLessonTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee('Isomeria Espacial');
         $response->assertSee('Neque porro quisquam est qui dolorem ipsum');
-        $response->assertSee('https://youtu.be/t_bOaAf_E0c');
+        $response->assertSee('https://www.youtube.com/embed/t_bOaAf_E0c');
 
     }
 
