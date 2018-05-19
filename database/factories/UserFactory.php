@@ -25,8 +25,8 @@ $factory->define(App\User::class, function (Faker $faker) {
 
 $factory->define(App\Lesson::class, function (Faker $faker) {
     return [
-        'subject_id' => 1,
-        'professor_id' => 1,
+        'subject_id' => 999,
+        'professor_id' => 999,
         'title' => 'The Example Lesson',
         'subtitle' => 'This subtitle is just a example',
         'link' => 'https://www.youtube.com/embed/t_bOaAf_E0c'

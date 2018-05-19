@@ -13,7 +13,8 @@
 
 Route::get('/lessons/create','LessonsController@create');
 Route::post('/lessons','LessonsController@store');
-Route::get('/lessons/{id}','LessonsController@show');
+Route::get('/lessons/{lesson}','LessonsController@show');
+Route::delete('/lessons/{lesson}', 'LessonsController@destroy');
 
 Auth::routes();
 
@@ -27,8 +28,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 |   GET             /example                index           example.index
 |   GET             /example/create         create          example.create
 |   POST            /example                store           example.store
-|   GET             /example/{id}           show            example.show
-|   GET             /example/{id}/edit      edit            example.edit
-|   PUT/PATCH       /example/{id)           update          example.update
-|   DELETE          /example/(id)           destroy         example.destroy
+|   GET             /example/{key}          show            example.show
+|   GET             /example/{key}/edit     edit            example.edit
+|   PUT/PATCH       /example/{key}          update          example.update
+|   DELETE          /example/{key}          destroy         example.destroy
 */
