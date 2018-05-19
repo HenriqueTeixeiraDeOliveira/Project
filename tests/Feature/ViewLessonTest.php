@@ -16,17 +16,15 @@ class ViewLessonTest extends TestCase
     public function user_can_watch_a_published_video_lesson()
     {
 
-        //$this->withoutExceptionHandling();
+        $this->withoutExceptionHandling();
 
         $lesson = factory(Lesson::class)->states('published')->create([
-            'subject_id' => "1",
-            'professor_id' => "1",
             'title' => "Isomeria Espacial",
             'subtitle' => "Neque porro quisquam est qui dolorem ipsum",
             'link' => 'https://www.youtube.com/embed/t_bOaAf_E0c',
         ]);
 
-        $response = $this->get('/lessons/'.$lesson->id);
+        $response = $this->get($lesson->path());
 
         $response->assertStatus(200);
         $response->assertSee('Isomeria Espacial');
@@ -40,7 +38,7 @@ class ViewLessonTest extends TestCase
     {
         $lesson = factory(Lesson::class)->states('unpublished')->create();
 
-        $response = $this->get('/lessons/'.$lesson->id);
+        $response = $this->get($lesson->path());
 
         $response->assertStatus(404);
     }

@@ -44,12 +44,12 @@ class CreateLessonTest extends TestCase
     {
         $lesson = create('App\Lesson');
 
-        $this->delete('/lessons/' . $lesson->id)
+        $this->delete($lesson->path())
              ->assertRedirect('/login');
 
         $this->signIn();
 
-        $this->delete('/lessons/' . $lesson->id)
+        $this->delete($lesson->path())
             ->assertStatus(403);
     }
 
@@ -62,7 +62,7 @@ class CreateLessonTest extends TestCase
 
         $this->assertDatabaseHas('lessons',['id' => $lesson->id]);
 
-        $response = $this->json('DELETE','/lessons/' . $lesson->id);
+        $response = $this->json('DELETE',$lesson->path());
 
         $response->assertStatus(204);
 

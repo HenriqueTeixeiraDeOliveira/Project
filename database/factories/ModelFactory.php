@@ -25,13 +25,32 @@ $factory->define(App\User::class, function (Faker $faker) {
 
 $factory->define(App\Lesson::class, function (Faker $faker) {
     return [
-        'subject_id' => 999,
-        'professor_id' => 999,
+        'professor_id' => function() {
+            return factory('App\User')->create()->id;
+        },
+        'channel_id' => function() {
+            return factory('App\Channel')->create()->id;
+        },
         'title' => 'The Example Lesson',
         'subtitle' => 'This subtitle is just a example',
         'link' => 'https://www.youtube.com/embed/t_bOaAf_E0c'
     ];
 });
+
+$factory->define(App\Channel::class, function (Faker $faker) {
+
+    $word = $faker->word;
+
+    return [
+       'name' => $word,
+       'slug' => $word
+   ];
+});
+
+
+
+
+
 
 $factory->state(App\Lesson::class, 'published', function ($faker) {
     return [

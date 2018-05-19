@@ -28,14 +28,14 @@ class LessonsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'subject_id' => ['required'],
+            'channel_id' => ['required'],
             'title' => ['required'],
             'subtitle' => ['required'],
             'link' => ['required']
         ]);
 
         $lesson = Lesson::create([
-            'subject_id' => request('subject_id'),
+            'channel_id' => request('channel_id'),
             'professor_id' => auth()->id(),
             'title' => request('title'),
             'subtitle' => request('subtitle'),
@@ -43,14 +43,14 @@ class LessonsController extends Controller
             'published_at' => request('published_at')
         ]);
 
-        return redirect('/lessons/'.$lesson->id);
+        return redirect($lesson->path());
     }
 
     /**
      * @param $lessonId
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show($lessonId)
+    public function show($channel, $lessonId)
     {
         $lesson = Lesson::published()->findOrFail($lessonId);
         return view('lessons.show', ['lesson' => $lesson]);
@@ -62,7 +62,7 @@ class LessonsController extends Controller
      * @throws \Exception
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function destroy (Lesson $lesson)
+    public function destroy ($channel, Lesson $lesson)
     {
         $this->authorize('update',$lesson);
 

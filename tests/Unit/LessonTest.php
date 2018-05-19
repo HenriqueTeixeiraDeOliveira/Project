@@ -11,6 +11,14 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class LessonTest extends TestCase
 {
     use DatabaseMigrations;
+
+    /** @test */
+    public function a_lesson_can_make_a_string_path()
+    {
+        $lesson = create('App\Lesson');
+        $this->assertEquals("/lessons/{$lesson->channel->slug}/{$lesson->id}", $lesson->path());
+    }
+
     /** @test */
     public function lessons_with_a_published_at_date_are_published()
     {
@@ -23,5 +31,12 @@ class LessonTest extends TestCase
         $this->assertTrue($publishedLessons->contains($publishedLessonA));
         $this->assertTrue($publishedLessons->contains($publishedLessonB));
         $this->assertFalse($publishedLessons->contains($unpublishedLesson));
+    }
+
+    /** @test */
+    public function a_lesson_belongs_to_a_channel()
+    {
+        $lesson = create('App\Lesson');
+        $this->assertInstanceOf('App\Channel',$lesson->channel);
     }
 }
